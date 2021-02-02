@@ -148,7 +148,7 @@ const RecipePage = ({ status, ...props }) => {
         <Grid item xs="9">
           {recipe.steps.map((s, i) => {
             return (
-              <Accordion>
+              <Accordion defaultExpanded="true">
                 <AccordionSummary>Step {i + 1}</AccordionSummary>
                 <AccordionDetails>
                   <Typography>{s}</Typography>
