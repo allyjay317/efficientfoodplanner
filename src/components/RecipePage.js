@@ -12,6 +12,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Typography,
 } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
@@ -22,6 +23,11 @@ const RecipePage = ({ status }) => {
     ingredients: [],
     steps: [],
   });
+  const [newIngredient, setNewIngredient] = useState({
+    quantity: "",
+    name: "",
+  });
+  const [newStep, setNewStep] = useState("");
 
   useEffect(() => {
     setRecipe({
@@ -33,7 +39,40 @@ const RecipePage = ({ status }) => {
       ],
       steps: ["step1", "step2", "step3", "step4"],
     });
-  });
+  }, []);
+
+  const onIngredientChange = (e) => {
+    setNewIngredient({
+      ...newIngredient,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onIngredientKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      if (newIngredient.name !== "" || newIngredient.quantity !== "") {
+        setRecipe({
+          ...recipe,
+          ingredients: [...recipe.ingredients, { ...newIngredient }],
+        });
+        setNewIngredient({ quantity: "", name: "" });
+      }
+    }
+  };
+
+  const onStepChange = (e) => {
+    setNewStep(e.target.value);
+  };
+
+  const onStepKeyDown = (e) => {
+    if (e.keyCode === 13 && newStep !== "") {
+      setRecipe({
+        ...recipe,
+        steps: [...recipe.steps, newStep],
+      });
+      setNewStep("");
+    }
+  };
 
   return (
     <div>
@@ -60,16 +99,23 @@ const RecipePage = ({ status }) => {
                 {status == "create" && (
                   <TableRow>
                     <TableCell>
-                      <Input name="quantity" />
+                      <TextField
+                        name="quantity"
+                        value={newIngredient.quantity}
+                        onChange={onIngredientChange}
+                        onKeyDown={onIngredientKeyDown}
+                      />
                     </TableCell>
                     <TableCell>
-                      <Input name="name" />
+                      <TextField
+                        name="name"
+                        value={newIngredient.name}
+                        onChange={onIngredientChange}
+                        onKeyDown={onIngredientKeyDown}
+                      />
                     </TableCell>
                   </TableRow>
                 )}
-                <TableRow>
-                  <Button>Add</Button>
-                </TableRow>
               </TableBody>
             </Table>
           </TableContainer>
@@ -86,8 +132,14 @@ const RecipePage = ({ status }) => {
               </Accordion>
             );
           })}
-
-          <ol></ol>
+          {status === "create" && (
+            <TextField
+              name="step"
+              onChange={onStepChange}
+              onKeyDown={onStepKeyDown}
+              value={newStep}
+            />
+          )}
         </Grid>
       </Grid>
     </div>
