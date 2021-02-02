@@ -2,6 +2,9 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Card,
+  CardActionArea,
+  CardMedia,
   Grid,
   Paper,
   Table,
@@ -34,10 +37,9 @@ const RecipePage = ({ status, ...props }) => {
   useEffect(() => {
     if (props.recipe) {
       setRecipe(props.recipe);
+      setEditingName(props.recipe.name);
     }
-
-    setEditingName("Macaroni");
-  }, [props]);
+  }, [props.recipe]);
 
   const onIngredientChange = (e) => {
     setNewIngredient({
@@ -90,19 +92,45 @@ const RecipePage = ({ status, ...props }) => {
     <div>
       <Grid container>
         <Grid item xs="12">
-          {editName ? (
-            <TextField
-              value={editingName}
-              onChange={onNameChange}
-              onKeyDown={onNameKeyDown}
-            ></TextField>
-          ) : (
-            <Typography variant="h1">{recipe.name}</Typography>
-          )}
+          <Card>
+            <CardActionArea>
+              <CardMedia
+                image="https://www.kitchentreaty.com/wp-content/uploads/2012/08/best-mac-and-cheese-recipe-20.jpg"
+                style={{ height: "40vh" }}
+              />
+            </CardActionArea>
+          </Card>
+          <div
+            style={{
+              position: "absolute",
+              zIndex: 1,
+              top: "20vh",
+              left: "50%",
+              marginLeft: "-25%",
+              textAlign: "center",
+              width: "50%",
+            }}
+          >
+            {editName ? (
+              <TextField
+                value={editingName}
+                onChange={onNameChange}
+                onKeyDown={onNameKeyDown}
+                inputProps={{
+                  style: { fontSize: "5.75rem", textAlign: "center" },
+                }}
+                size="medium"
+              ></TextField>
+            ) : (
+              <Typography variant="h1">{recipe.name}</Typography>
+            )}
 
-          {status === "create" && (
-            <EditIcon onClick={() => setEditName(true)}></EditIcon>
-          )}
+            {status === "create" && (
+              <div>
+                <EditIcon onClick={() => setEditName(true)}></EditIcon>
+              </div>
+            )}
+          </div>
         </Grid>
         <Grid item xs="3">
           <TableContainer component={Paper}>
