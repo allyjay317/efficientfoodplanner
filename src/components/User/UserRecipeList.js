@@ -8,11 +8,11 @@ import {
 } from "@material-ui/core";
 import React from "react";
 
-const UserRecipeList = ({ recipeList }) => {
+const UserRecipeList = ({ recipeList, title }) => {
   return (
-    <Grid container xs={9} spacing={2} justify="center">
+    <Grid container spacing={2} justify="center">
       <Grid item xs={12}>
-        <Typography variant="h4">Your Recipes</Typography>
+        <Typography variant="h4">{title}</Typography>
       </Grid>
 
       {recipeList.map((r) => (
