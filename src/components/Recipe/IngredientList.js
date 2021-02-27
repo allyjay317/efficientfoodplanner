@@ -15,6 +15,8 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
     quantity: "",
     name: "",
   });
+  const [editIngredient, setEditIngredient] = useState(-1);
+  const [editData, setEditData] = useState({ quantity: "", name: "" });
 
   const onIngredientChange = (e) => {
     setNewIngredient({
@@ -32,6 +34,24 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
     }
   };
 
+  const onEditChange = (e) => {
+    setEditData({
+      ...editData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onEditKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      if (editData.name !== "" || editData.quantity !== "") {
+        const edited = [...ingredients];
+        edited[editIngredient] = editData;
+        changeIngredients(edited);
+        setEditIngredient(-1);
+      }
+    }
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -43,8 +63,31 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
           {ingredients.map((i) => {
             return (
               <TableRow key={i.name}>
-                <TableCell>{i.quantity}</TableCell>
-                <TableCell align="left">{i.name}</TableCell>
+                {editIngredient === i ? (
+                  <>
+                    <TableCell>
+                      <TextField
+                        name="quantity"
+                        onChange={onEditChange}
+                        onKeyDown={onEditKeyDown}
+                        value={editData.quantity}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <TextField
+                        name="name"
+                        onChange={onEditChange}
+                        onKeyDown={onEditKeyDown}
+                        value={editData.name}
+                      />
+                    </TableCell>
+                  </>
+                ) : (
+                  <>
+                    <TableCell>{i.quantity}</TableCell>
+                    <TableCell align="left">{i.name}</TableCell>
+                  </>
+                )}
               </TableRow>
             );
           })}
