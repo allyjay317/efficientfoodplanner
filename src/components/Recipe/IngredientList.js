@@ -1,4 +1,5 @@
 import {
+  Button,
   Paper,
   Table,
   TableBody,
@@ -15,6 +16,8 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
     quantity: "",
     name: "",
   });
+  const [editIngredient, setEditIngredient] = useState(-1);
+  const [editData, setEditData] = useState({ quantity: "", name: "" });
 
   const onIngredientChange = (e) => {
     setNewIngredient({
@@ -32,6 +35,25 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
     }
   };
 
+  const onEditChange = (e) => {
+    setEditData({
+      ...editData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const onEditKeyDown = (e) => {
+    if (e.keyCode === 13) {
+      if (editData.name !== "" || editData.quantity !== "") {
+        debugger;
+        const edited = [...ingredients];
+        edited[editIngredient] = editData;
+        changeIngredients(edited);
+        setEditIngredient(-1);
+      }
+    }
+  };
+
   return (
     <TableContainer component={Paper}>
       <Table>
@@ -40,11 +62,51 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
           <TableCell>Ingredient</TableCell>
         </TableHead>
         <TableBody>
-          {ingredients.map((i) => {
+          {ingredients.map((i, index) => {
             return (
               <TableRow key={i.name}>
-                <TableCell>{i.quantity}</TableCell>
-                <TableCell align="left">{i.name}</TableCell>
+                {editIngredient === index ? (
+                  <>
+                    <TableCell>
+                      <TextField
+                        name="quantity"
+                        onChange={onEditChange}
+                        onKeyDown={onEditKeyDown}
+                        value={editData.quantity}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <TextField
+                        name="name"
+                        onChange={onEditChange}
+                        onKeyDown={onEditKeyDown}
+                        value={editData.name}
+                      />
+                    </TableCell>
+                    <Button
+                      onClick={() => {
+                        onEditKeyDown({ keyCode: 13 });
+                      }}
+                    >
+                      Done
+                    </Button>
+                  </>
+                ) : (
+                  <>
+                    <TableCell>{i.quantity}</TableCell>
+                    <TableCell align="left">{i.name}</TableCell>
+                    {status == "create" && (
+                      <Button
+                        onClick={() => {
+                          setEditData(i);
+                          setEditIngredient(index);
+                        }}
+                      >
+                        Edit
+                      </Button>
+                    )}
+                  </>
+                )}
               </TableRow>
             );
           })}
