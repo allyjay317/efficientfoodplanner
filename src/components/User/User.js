@@ -24,7 +24,16 @@ const User = () => {
         <UserMealPlan mealPlan={user.mealPlan} />
         <UserShoppingList shoppingList={user.shoppingList} />
       </Grid>
-      <UserRecipeList recipeList={user.recipeList} />
+      <Grid container xs={9}>
+        <UserRecipeList
+          recipeList={user.recipeList.personal}
+          title="Your Recipes"
+        />
+        <UserRecipeList
+          recipeList={user.recipeList.saved}
+          title="Saved Recipes"
+        />
+      </Grid>
     </Grid>
   );
 };
