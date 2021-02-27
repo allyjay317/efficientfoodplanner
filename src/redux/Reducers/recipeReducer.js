@@ -15,9 +15,11 @@ const defaultRecipe = {
   ],
 };
 
-export const recipeReducer = (state = defaultRecipe, action) => {
+const recipeReducer = (state = defaultRecipe, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
+
+export default recipeReducer;

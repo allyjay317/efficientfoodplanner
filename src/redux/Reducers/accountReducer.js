@@ -19,9 +19,11 @@ const defaultUser = {
   ],
 };
 
-export const accountReducer = (state = defaultUser, action) => {
+const accountReducer = (state = defaultUser, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
+
+export default accountReducer;
