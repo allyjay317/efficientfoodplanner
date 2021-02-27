@@ -45,7 +45,6 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
   const onEditKeyDown = (e) => {
     if (e.keyCode === 13) {
       if (editData.name !== "" || editData.quantity !== "") {
-        debugger;
         const edited = [...ingredients];
         edited[editIngredient] = editData;
         changeIngredients(edited);
