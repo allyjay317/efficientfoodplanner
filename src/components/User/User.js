@@ -9,12 +9,14 @@ import {
   Typography,
 } from "@material-ui/core";
 import React from "react";
+import { useSelector } from "react-redux";
 import UserHeader from "./UserHeader";
 import UserMealPlan from "./UserMealPlan";
 import UserRecipeList from "./UserRecipeList";
 import UserShoppingList from "./UserShoppingList";
 
-const User = ({ user }) => {
+const User = () => {
+  const user = useSelector((state) => state.user);
   return (
     <Grid container>
       <UserHeader name={user.name} />
