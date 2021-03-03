@@ -7,8 +7,12 @@ import {
 } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateName } from "../../redux/Actions/recipeActions";
 
-const RecipeHeader = ({ changeName, status, name }) => {
+const RecipeHeader = ({ changeName, status }) => {
+  const name = useSelector((state) => state.recipe.name);
+  const dispatch = useDispatch();
   const [editName, setEditName] = useState(false);
   const [editingName, setEditingName] = useState(name);
 
@@ -23,7 +27,7 @@ const RecipeHeader = ({ changeName, status, name }) => {
   const onNameKeyDown = (e) => {
     if (e.keyCode === 13 && editingName !== "") {
       setEditName(false);
-      changeName(editingName);
+      dispatch(updateName(editingName));
     }
   };
 
