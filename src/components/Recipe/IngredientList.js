@@ -10,8 +10,12 @@ import {
   TextField,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateIngredients } from "../../redux/Actions/recipeActions";
 
-const IngredientList = ({ ingredients, status, changeIngredients }) => {
+const IngredientList = ({ status, changeIngredients }) => {
+  const ingredients = useSelector((state) => state.recipe.ingredients);
+  const dispatch = useDispatch();
   const [newIngredient, setNewIngredient] = useState({
     quantity: "",
     name: "",
@@ -29,7 +33,7 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
   const onIngredientKeyDown = (e) => {
     if (e.keyCode === 13) {
       if (newIngredient.name !== "" || newIngredient.quantity !== "") {
-        changeIngredients([...ingredients, { ...newIngredient }]);
+        dispatch(updateIngredients([...ingredients, { ...newIngredient }]));
         setNewIngredient({ quantity: "", name: "" });
       }
     }
@@ -47,7 +51,7 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
       if (editData.name !== "" || editData.quantity !== "") {
         const edited = [...ingredients];
         edited[editIngredient] = editData;
-        changeIngredients(edited);
+        dispatch(updateIngredients(edited));
         setEditIngredient(-1);
       }
     }
@@ -94,7 +98,7 @@ const IngredientList = ({ ingredients, status, changeIngredients }) => {
                   <>
                     <TableCell>{i.quantity}</TableCell>
                     <TableCell align="left">{i.name}</TableCell>
-                    {status == "create" && (
+                    {status === "create" && (
                       <Button
                         onClick={() => {
                           setEditData(i);
