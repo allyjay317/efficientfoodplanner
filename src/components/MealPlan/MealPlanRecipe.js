@@ -7,7 +7,7 @@ const MealPlanRecipe = ({ meal }) => {
       <Typography>{meal.name}</Typography>
       <ul>
         {meal.ingredients.map((i) => (
-          <li>{i}</li>
+          <li>{i.name}</li>
         ))}
       </ul>
     </TableCell>
