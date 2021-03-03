@@ -2,6 +2,7 @@ import React from "react";
 
 import {
   Grid,
+  Paper,
   Table,
   TableBody,
   TableContainer,
@@ -221,34 +222,38 @@ const defaultMealPlan = [
 
 const MealPlanPage = () => {
   return (
-    <Grid container>
-      <TableContainer>
-        <Table>
-          <TableHead>
-            {[
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday",
-            ].map((day) => (
-              <MealPlanDay day={day} />
-            ))}
-          </TableHead>
-          <TableBody>
-            <TableRow>
-              {defaultMealPlan.map((meal) => (
-                <MealPlanRecipe meal={meal} />
+    <Grid container spacing={3}>
+      <Grid item xs={12}>
+        <TableContainer component={Paper}>
+          <Table>
+            <TableHead>
+              {[
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+              ].map((day) => (
+                <MealPlanDay day={day} />
               ))}
-            </TableRow>
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <MealPlanIngredients
-        ingredients={defaultMealPlan.map((meal) => meal.ingredients)}
-      />
+            </TableHead>
+            <TableBody>
+              <TableRow>
+                {defaultMealPlan.map((meal) => (
+                  <MealPlanRecipe meal={meal} />
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Grid>
+      <Grid item xs={12}>
+        <MealPlanIngredients
+          ingredients={defaultMealPlan.map((meal) => meal.ingredients)}
+        />
+      </Grid>
     </Grid>
   );
 };

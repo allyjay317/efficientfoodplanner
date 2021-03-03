@@ -1,3 +1,4 @@
+import { Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 
 const MealPlanIngredients = (props) => {
@@ -19,17 +20,20 @@ const MealPlanIngredients = (props) => {
   }, [props.ingredients]);
 
   return (
-    <ul>
-      {ingredients.map((i) => {
-        const plural = i.qty > 1;
-        return (
-          <li>
-            {i.qty} {plural ? i.pluralUnit : i.unit}{" "}
-            {plural ? i.pluralName : i.name}
-          </li>
-        );
-      })}
-    </ul>
+    <Grid item xs={12}>
+      <Typography>Total Ingredients Needed: {ingredients.length}</Typography>
+      <ul>
+        {ingredients.map((i) => {
+          const plural = i.qty > 1;
+          return (
+            <li>
+              {i.qty} {plural ? i.pluralUnit : i.unit}{" "}
+              {plural ? i.pluralName : i.name}
+            </li>
+          );
+        })}
+      </ul>
+    </Grid>
   );
 };
 
