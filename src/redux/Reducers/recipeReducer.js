@@ -1,3 +1,9 @@
+import {
+  UPDATE_INGREDIENTS,
+  UPDATE_NAME,
+  UPDATE_STEPS,
+} from "../Actions/recipeActions";
+
 const defaultRecipe = {
   name: "Macaroni",
   ingredients: [
@@ -17,6 +23,21 @@ const defaultRecipe = {
 
 const recipeReducer = (state = defaultRecipe, action) => {
   switch (action.type) {
+    case UPDATE_NAME:
+      return {
+        ...state,
+        name: action.payload,
+      };
+    case UPDATE_STEPS:
+      return {
+        ...state,
+        steps: action.payload,
+      };
+    case UPDATE_INGREDIENTS:
+      return {
+        ...state,
+        ingredients: action.payload,
+      };
     default:
       return state;
   }
