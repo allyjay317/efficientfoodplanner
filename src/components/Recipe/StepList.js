@@ -8,8 +8,12 @@ import {
   Typography,
 } from "@material-ui/core";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateSteps } from "../../redux/Actions/recipeActions";
 
-const StepList = ({ steps, status, changeSteps }) => {
+const StepList = ({ status }) => {
+  const steps = useSelector((state) => state.recipe.steps);
+  const dispatch = useDispatch();
   const [newStep, setNewStep] = useState("");
   const [editingStep, setEditingStep] = useState(-1);
   const [editingStepText, setEditingStepText] = useState("");
@@ -20,7 +24,7 @@ const StepList = ({ steps, status, changeSteps }) => {
 
   const onNewStepKeyDown = (e) => {
     if (e.keyCode === 13 && newStep !== "") {
-      changeSteps([...steps, newStep]);
+      dispatch(updateSteps([...steps, newStep]));
       setNewStep("");
     }
   };
@@ -38,7 +42,7 @@ const StepList = ({ steps, status, changeSteps }) => {
   const editStepText = (i) => {
     const newSteps = [...steps];
     newSteps[i] = editingStepText;
-    changeSteps(newSteps);
+    dispatch(updateSteps(newSteps));
     setEditingStep(-1);
   };
 
