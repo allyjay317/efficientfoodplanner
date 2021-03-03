@@ -11,35 +11,211 @@ import {
 
 import MealPlanDay from "./MealPlanDay";
 import MealPlanRecipe from "./MealPlanRecipe";
+import MealPlanIngredients from "./MealPlanIngredients";
 
 const defaultMealPlan = [
   {
     name: "Orange Chicken",
-    ingredients: ["orange", "chicken", "soy sauce"],
+    ingredients: [
+      {
+        id: 1,
+        name: "orange",
+        qty: 1,
+        unit: "Large",
+        pluralUnit: "Large",
+        pluralName: "Oranges",
+      },
+      {
+        id: 2,
+        name: "chicken",
+        qty: 1,
+        unit: "lb",
+        pluralUnit: "lbs",
+        pluralName: "chicken",
+      },
+      {
+        id: 3,
+        name: "soy sauce",
+        qty: 1,
+        unit: "tbsp",
+        pluralUnit: "tbsps",
+        pluralName: "soy sauce",
+      },
+    ],
   },
   {
     name: "Orange Chicken",
-    ingredients: ["orange", "chicken", "soy sauce"],
+    ingredients: [
+      {
+        id: 1,
+        name: "orange",
+        qty: 1,
+        unit: "Large",
+        pluralUnit: "Large",
+        pluralName: "Oranges",
+      },
+      {
+        id: 2,
+        name: "chicken",
+        qty: 1,
+        unit: "lb",
+        pluralUnit: "lbs",
+        pluralName: "chicken",
+      },
+      {
+        id: 3,
+        name: "soy sauce",
+        qty: 1,
+        unit: "tbsp",
+        pluralUnit: "tbsps",
+        pluralName: "soy sauce",
+      },
+    ],
   },
   {
     name: "Orange Chicken",
-    ingredients: ["orange", "chicken", "soy sauce"],
+    ingredients: [
+      {
+        id: 1,
+        name: "orange",
+        qty: 1,
+        unit: "Large",
+        pluralUnit: "Large",
+        pluralName: "Oranges",
+      },
+      {
+        id: 2,
+        name: "chicken",
+        qty: 1,
+        unit: "lb",
+        pluralUnit: "lbs",
+        pluralName: "chicken",
+      },
+      {
+        id: 3,
+        name: "soy sauce",
+        qty: 1,
+        unit: "tbsp",
+        pluralUnit: "tbsps",
+        pluralName: "soy sauce",
+      },
+    ],
   },
   {
     name: "Orange Chicken",
-    ingredients: ["orange", "chicken", "soy sauce"],
+    ingredients: [
+      {
+        id: 1,
+        name: "orange",
+        qty: 1,
+        unit: "Large",
+        pluralUnit: "Large",
+        pluralName: "Oranges",
+      },
+      {
+        id: 2,
+        name: "chicken",
+        qty: 1,
+        unit: "lb",
+        pluralUnit: "lbs",
+        pluralName: "chicken",
+      },
+      {
+        id: 3,
+        name: "soy sauce",
+        qty: 1,
+        unit: "tbsp",
+        pluralUnit: "tbsps",
+        pluralName: "soy sauce",
+      },
+    ],
   },
   {
     name: "Orange Chicken",
-    ingredients: ["orange", "chicken", "soy sauce"],
+    ingredients: [
+      {
+        id: 1,
+        name: "orange",
+        qty: 1,
+        unit: "Large",
+        pluralUnit: "Large",
+        pluralName: "Oranges",
+      },
+      {
+        id: 2,
+        name: "chicken",
+        qty: 1,
+        unit: "lb",
+        pluralUnit: "lbs",
+        pluralName: "chicken",
+      },
+      {
+        id: 3,
+        name: "soy sauce",
+        qty: 1,
+        unit: "tbsp",
+        pluralUnit: "tbsps",
+        pluralName: "soy sauce",
+      },
+    ],
   },
   {
     name: "Orange Chicken",
-    ingredients: ["orange", "chicken", "soy sauce"],
+    ingredients: [
+      {
+        id: 1,
+        name: "orange",
+        qty: 1,
+        unit: "Large",
+        pluralUnit: "Large",
+        pluralName: "Oranges",
+      },
+      {
+        id: 2,
+        name: "chicken",
+        qty: 1,
+        unit: "lb",
+        pluralUnit: "lbs",
+        pluralName: "chicken",
+      },
+      {
+        id: 3,
+        name: "soy sauce",
+        qty: 1,
+        unit: "tbsp",
+        pluralUnit: "tbsps",
+        pluralName: "soy sauce",
+      },
+    ],
   },
   {
     name: "Orange Chicken",
-    ingredients: ["orange", "chicken", "soy sauce"],
+    ingredients: [
+      {
+        id: 1,
+        name: "orange",
+        qty: 1,
+        unit: "Large",
+        pluralUnit: "Large",
+        pluralName: "Oranges",
+      },
+      {
+        id: 2,
+        name: "chicken",
+        qty: 1,
+        unit: "lb",
+        pluralUnit: "lbs",
+        pluralName: "chicken",
+      },
+      {
+        id: 3,
+        name: "soy sauce",
+        qty: 1,
+        unit: "tbsp",
+        pluralUnit: "tbsps",
+        pluralName: "soy sauce",
+      },
+    ],
   },
 ];
 
@@ -70,6 +246,9 @@ const MealPlanPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
+      <MealPlanIngredients
+        ingredients={defaultMealPlan.map((meal) => meal.ingredients)}
+      />
     </Grid>
   );
 };
