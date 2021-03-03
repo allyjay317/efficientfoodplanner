@@ -1,13 +1,4 @@
-import {
-  Button,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Grid,
-  Typography,
-} from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import React from "react";
 import { useSelector } from "react-redux";
 import UserHeader from "./UserHeader";
