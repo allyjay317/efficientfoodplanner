@@ -13,214 +13,10 @@ import {
 import MealPlanDay from "./MealPlanDay";
 import MealPlanRecipe from "./MealPlanRecipe";
 import MealPlanIngredients from "./MealPlanIngredients";
-
-const defaultMealPlan = [
-  {
-    name: "Orange Chicken",
-    ingredients: [
-      {
-        id: 1,
-        name: "orange",
-        qty: 1,
-        unit: "Small",
-        pluralUnit: "Large",
-        pluralName: "Oranges",
-      },
-      {
-        id: 2,
-        name: "chicken",
-        qty: 200,
-        unit: "g",
-        pluralUnit: "lbs",
-        pluralName: "chicken",
-      },
-      {
-        id: 3,
-        name: "soy sauce",
-        qty: 1,
-        unit: "tbsp",
-        pluralUnit: "tbsps",
-        pluralName: "soy sauce",
-      },
-    ],
-  },
-  {
-    name: "Orange Chicken",
-    ingredients: [
-      {
-        id: 1,
-        name: "orange",
-        qty: 1,
-        unit: "Large",
-        pluralUnit: "Large",
-        pluralName: "Oranges",
-      },
-      {
-        id: 2,
-        name: "chicken",
-        qty: 1,
-        unit: "lb",
-        pluralUnit: "lbs",
-        pluralName: "chicken",
-      },
-      {
-        id: 3,
-        name: "soy sauce",
-        qty: 1,
-        unit: "tsp",
-        pluralUnit: "tbsps",
-        pluralName: "soy sauce",
-      },
-    ],
-  },
-  {
-    name: "Orange Chicken",
-    ingredients: [
-      {
-        id: 1,
-        name: "orange",
-        qty: 1,
-        unit: "Large",
-        pluralUnit: "Large",
-        pluralName: "Oranges",
-      },
-      {
-        id: 2,
-        name: "chicken",
-        qty: 1,
-        unit: "lb",
-        pluralUnit: "lbs",
-        pluralName: "chicken",
-      },
-      {
-        id: 3,
-        name: "soy sauce",
-        qty: 1,
-        unit: "tbsp",
-        pluralUnit: "tbsps",
-        pluralName: "soy sauce",
-      },
-    ],
-  },
-  {
-    name: "Orange Chicken",
-    ingredients: [
-      {
-        id: 1,
-        name: "orange",
-        qty: 1,
-        unit: "Large",
-        pluralUnit: "Large",
-        pluralName: "Oranges",
-      },
-      {
-        id: 2,
-        name: "chicken",
-        qty: 1,
-        unit: "lb",
-        pluralUnit: "lbs",
-        pluralName: "chicken",
-      },
-      {
-        id: 3,
-        name: "soy sauce",
-        qty: 1,
-        unit: "tbsp",
-        pluralUnit: "tbsps",
-        pluralName: "soy sauce",
-      },
-    ],
-  },
-  {
-    name: "Orange Chicken",
-    ingredients: [
-      {
-        id: 1,
-        name: "orange",
-        qty: 1,
-        unit: "Large",
-        pluralUnit: "Large",
-        pluralName: "Oranges",
-      },
-      {
-        id: 2,
-        name: "chicken",
-        qty: 1,
-        unit: "lb",
-        pluralUnit: "lbs",
-        pluralName: "chicken",
-      },
-      {
-        id: 3,
-        name: "soy sauce",
-        qty: 1,
-        unit: "tbsp",
-        pluralUnit: "tbsps",
-        pluralName: "soy sauce",
-      },
-    ],
-  },
-  {
-    name: "Orange Chicken",
-    ingredients: [
-      {
-        id: 1,
-        name: "orange",
-        qty: 1,
-        unit: "Large",
-        pluralUnit: "Large",
-        pluralName: "Oranges",
-      },
-      {
-        id: 2,
-        name: "chicken",
-        qty: 1,
-        unit: "lb",
-        pluralUnit: "lbs",
-        pluralName: "chicken",
-      },
-      {
-        id: 3,
-        name: "soy sauce",
-        qty: 1,
-        unit: "tbsp",
-        pluralUnit: "tbsps",
-        pluralName: "soy sauce",
-      },
-    ],
-  },
-  {
-    name: "Orange Chicken",
-    ingredients: [
-      {
-        id: 1,
-        name: "orange",
-        qty: 1,
-        unit: "Large",
-        pluralUnit: "Large",
-        pluralName: "Oranges",
-      },
-      {
-        id: 2,
-        name: "chicken",
-        qty: 1,
-        unit: "lb",
-        pluralUnit: "lbs",
-        pluralName: "chicken",
-      },
-      {
-        id: 3,
-        name: "soy sauce",
-        qty: 1,
-        unit: "tbsp",
-        pluralUnit: "tbsps",
-        pluralName: "soy sauce",
-      },
-    ],
-  },
-];
+import { useSelector } from "react-redux";
 
 const MealPlanPage = () => {
+  const mealPlan = useSelector((state) => state.mealPlan);
   return (
     <Grid container spacing={3}>
       <Grid item xs={12}>
@@ -241,7 +37,7 @@ const MealPlanPage = () => {
             </TableHead>
             <TableBody>
               <TableRow>
-                {defaultMealPlan.map((meal) => (
+                {mealPlan.map((meal) => (
                   <MealPlanRecipe meal={meal} />
                 ))}
               </TableRow>
@@ -251,7 +47,7 @@ const MealPlanPage = () => {
       </Grid>
       <Grid item xs={12}>
         <MealPlanIngredients
-          ingredients={defaultMealPlan.map((meal) => meal.ingredients)}
+          ingredients={mealPlan.map((meal) => meal.ingredients)}
         />
       </Grid>
     </Grid>
