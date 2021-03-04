@@ -1,5 +1,6 @@
 import { Grid, Typography } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
+import unitConverter from "../../utils/unitConverter";
 
 const MealPlanIngredients = (props) => {
   const [ingredients, setIngredients] = useState([]);
@@ -7,12 +8,11 @@ const MealPlanIngredients = (props) => {
     const dict = {};
     props.ingredients.forEach((meal) => {
       meal.forEach((i) => {
-        debugger;
         const exists = dict[i.name];
         if (exists) {
-          dict[i.name] = { ...dict[i.name], qty: exists.qty + i.qty };
+          dict[i.name] = unitConverter(exists, i);
         } else {
-          dict[i.name] = i;
+          dict[i.name] = [i];
         }
       });
     });
@@ -23,12 +23,16 @@ const MealPlanIngredients = (props) => {
     <Grid item xs={12}>
       <Typography>Total Ingredients Needed: {ingredients.length}</Typography>
       <ul>
-        {ingredients.map((i) => {
-          const plural = i.qty > 1;
+        {ingredients.map((ingr) => {
           return (
             <li>
-              {i.qty} {plural ? i.pluralUnit : i.unit}{" "}
-              {plural ? i.pluralName : i.name}
+              {ingr.map((unit) => {
+                const plural = unit.qty > 1;
+                return `${unit.qty} ${plural ? unit.pluralUnit : unit.unit}, `;
+              })}
+              {ingr.length > 1 || ingr[0].qty > 1
+                ? ingr[0].pluralName
+                : ingr[0].name}
             </li>
           );
         })}
